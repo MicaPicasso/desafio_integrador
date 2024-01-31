@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="style.css">
+
+<div>
+  <h1>Bienvenido, {{user.name}}</h1>
+<h2 class="product_title">Lista de Productos</h>
+<div class="product_container">
+{{#each products}}
+
+  <div class="product">
+    <h2>{{this.title}}</h2>
+    <img src="https://dummyimage.com/200x300/000/fff" alt="">
+    <p>{{this.description}}</p>
+    <p>Precio: {{this.price}}</p>
+    <p>Stock: {{this.stock}}</p>
+    <p>Categoría: {{this.category}}</p>
+  </div>
+
+ {{/each}} 
+</div>
+</div>
+
+<script src="../public/main.js"></script>
+<script src="/js/user.js"></script>
