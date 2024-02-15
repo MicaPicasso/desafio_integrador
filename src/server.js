@@ -5,6 +5,7 @@
 // server.js
 import express from 'express';
 import handlebars from 'express-handlebars';
+import config from './config/config.js';
 import productsRouter from './routes/productsRouter.js';
 import cartRouter from './routes/cartRouter.js';
 import viewsRouter from './routes/viewsRouter.js';
@@ -22,6 +23,9 @@ import MongoStore from 'connect-mongo';
 import passport from 'passport';
 import initializePassport from './config/passport.config.js';
 import cookieParser from 'cookie-parser';
+import program from './process.js'
+import MongoSingleton from './config/mongobd-singleton.js'
+
 
 const server= express()
 
@@ -47,7 +51,8 @@ server.use(express.urlencoded({extended:true}))
 
 
 
-const MONGO_URL=`mongodb+srv://micapicasso:${password}@cluster0.boiyenp.mongodb.net/${db_name}?retryWrites=true&w=majority`
+const MONGO_URL= config.urlMongo
+const port= config.port
 
 // Configuracion de Session
 server.use(session(  
@@ -96,11 +101,31 @@ mongoose.connect(
     `mongodb+srv://micapicasso:${password}@cluster0.boiyenp.mongodb.net/${db_name}?retryWrites=true&w=majority`)
     .then(() => {
         console.log('Conexión exitosa a MongoDB');
+        // console.log(process);
+
+        // excluir los argv por defecto ---- CLASE 25
+        // console.log(process.argv.slice(2));
+        // const args= process.argv.slice(2)
+
         // Iniciar el servidor una vez conectado a la base de datos
         server.listen(PORT, () => {
-            console.log(`Servidor escuchando en el puerto: ${PORT}`);
+            console.log(`Servidor escuchando en el puerto: ${port}`);
+            // console.log(process);
+            // process.exit(5)
         });
+
     })
     .catch(error => {
         console.error('Error al conectar a MongoDB:', error);
     });
+
+
+    const mongoInstance = async () => {
+        try {
+            await MongoSingleton.getInstance()
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    mongoInstance();

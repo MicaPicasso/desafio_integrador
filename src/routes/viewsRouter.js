@@ -2,6 +2,9 @@ import { Router } from "express";
 import productDao from "../dao/product.dao.js";
 import cartDao from "../dao/cart.dao.js";
 
+// clase 25
+import { fork } from "child_process";
+
 const router= Router()
 
 router.get("/", (req,res)=>{
