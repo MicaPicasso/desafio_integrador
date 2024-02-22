@@ -1,12 +1,13 @@
 import { Router } from 'express';
-import cartDao from '../dao/cart.dao.js';
+import { cartService } from '../services/factory.js';
+
 
 const router = Router();
 
 // crear un carrito
 router.post('/', async(req,res)=>{
     try {
-        const newCart = await cartDao.createCart({ products: [] });
+        const newCart = await cartService.createCart({ products: [] });
         res.json(newCart);
 
     } catch (error) {
@@ -22,7 +23,7 @@ router.post('/', async(req,res)=>{
 router.get('/:cid', async(req,res)=>{
     try {
         const { cid } = req.params;
-        const cart = await cartDao.getCartById({_id: cid});
+        const cart = await cartService.getCartById({_id: cid});
         res.json(cart);
     } catch (error) {
         console.log(error);
@@ -37,7 +38,7 @@ router.get('/:cid', async(req,res)=>{
 router.post('/:cid/product/:pid', async(req,res)=>{
     try {
         const { cid, pid } = req.params;
-        const cart = await cartDao.getCartById({_id: cid});
+        const cart = await cartService.getCartById({_id: cid});
 
         // Verificar si el producto ya está en el carrito
         const existingProductIndex = cart.products.findIndex(product => String(product.product._id) == pid);
@@ -55,7 +56,7 @@ router.post('/:cid/product/:pid', async(req,res)=>{
         }
         
             // Devolver el carrito actualizado
-            const updatedCart = await cartDao.getCartByIdandUpdate({_id: cid}, cart);
+            const updatedCart = await cartService.getCartByIdandUpdate({_id: cid}, cart);
             
             res.json(updatedCart);
 
@@ -75,7 +76,7 @@ router.delete('/:cid/product/:pid', async(req,res)=>{
         const { cid, pid } = req.params;
 
         // Lógica para eliminar un producto del carrito
-        const cart = await cartDao.getCartById({_id: cid});
+        const cart = await cartService.getCartById({_id: cid});
         if (!cart) {
             return res.json({ message: 'Carrito no encontrado' });
         }
@@ -101,14 +102,14 @@ router.delete('/:cid/product/:pid', async(req,res)=>{
 router.delete('/:cid', async(req,res)=>{
     try {
         const { cid } = req.params;
-        const cart = await cartDao.getCartById({_id:cid});
+        const cart = await cartService.getCartById({_id:cid});
 
         // Limpiar todos los productos del carrito
         cart.products = [];
         await cart.save();
 
         // Devolver el carrito vacío
-        const emptyCart = await cartDao.getCartById({_id:cid});
+        const emptyCart = await cartService.getCartById({_id:cid});
         res.json(emptyCart);
     } catch (error) {
         console.log(error);

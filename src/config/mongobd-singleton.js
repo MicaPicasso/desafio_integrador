@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 import {password, db_name} from '../env.js'
+import config from "./config.js";
 
-class MongoSingleton {
+export default class MongoSingleton {
     static #instance;
 
     constructor() {
@@ -22,7 +23,12 @@ class MongoSingleton {
 
     #connectMongoDB = async()=>{
         try{
-            await mongoose.connect(`mongodb+srv://micapicasso:${password}@cluster0.boiyenp.mongodb.net/${db_name}?retryWrites=true&w=majority`)
+            await mongoose.connect(/*`mongodb+srv://micapicasso:${password}@cluster0.boiyenp.mongodb.net/${db_name}?retryWrites=true&w=majority`*/
+            config.urlMongo,
+            {
+                w:1,
+            }
+            );
             console.log('Conectado con exito a MongoDb usando Mongoose');
         }catch(error){
             console.error('No se pudo conectar')
@@ -30,5 +36,3 @@ class MongoSingleton {
         }
     }
 }
-
-export default MongoSingleton

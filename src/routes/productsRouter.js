@@ -1,6 +1,8 @@
 import { Router } from 'express';
-import productDao from '../dao/product.dao.js'
-import productModel from '../models/productsModel.js';
+// import productDao from '../services/dao/mongo/product.dao.js'
+import {productService} from '../services/factory.js'
+
+import productModel from '../services/dao/mongo/models/product.js';
 
 const router = Router();
 
@@ -51,20 +53,20 @@ router.get('/', async(req,res)=>{
 router.get('/:pid', async(req,res)=>{
     try {
             const { pid } = req.params;
-            const product = await productDao.getProductById({_id: pid});
+            const product = await productService.getProductById({_id: pid});
             
             if (product) {
                 res.json(product);
             } else {
                 res.json({ message: 'Producto no encontrado' });
             }
-        } catch (error) {
+    } catch (error) {
             console.log(error);
             res.json({
                 message: "error",
                 error
-            })
-        }
+        })
+    }
 })
 
 
@@ -84,7 +86,7 @@ router.post('/', async(req,res)=>{
                 thumbnails: thumbnails
             };
 
-            const response = await productDao.createProduct(newProduct);
+            const response = await productService.createProduct(newProduct);
             res.json({'Producto agregado con exito': response});
         
         } catch (error) {
@@ -103,7 +105,7 @@ router.put('/:pid', async(req,res)=>{
         const { pid } = req.params;
         const product= req.body
 
-        const updatedProduct = await productDao.updateProduct({_id: pid}, product);
+        const updatedProduct = await productService.updateProduct({_id: pid}, product);
 
         if (updatedProduct) {
             res.json(updatedProduct);
@@ -124,7 +126,7 @@ router.put('/:pid', async(req,res)=>{
 router.delete('/:pid', async(req,res)=>{
     try {
         const { pid } = req.params;
-        const deletedProduct = await productDao.deleteProduct({_id: pid});
+        const deletedProduct = await productService.deleteProduct({_id: pid});
 
         if (deletedProduct) {
             res.json({ message: 'Producto eliminado correctamente' });

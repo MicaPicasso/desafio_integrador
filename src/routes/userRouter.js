@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { authToken } from "../utils.js";
-import userModel from "../models/userModel.js";
+import userModel from "../services/dao/mongo/models/user.js";
 import passport from "passport";
 import { passportCall, authorization } from "../utils.js";
 

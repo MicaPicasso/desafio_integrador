@@ -1,5 +1,5 @@
 import { Router } from "express";
-import userModel from "../models/userModel.js";
+import userModel from "../services/dao/mongo/models/user.js";
 import { isValidPassword } from "../utils.js";
 import { generateJWToken } from "../utils.js";
 import passport from "passport";

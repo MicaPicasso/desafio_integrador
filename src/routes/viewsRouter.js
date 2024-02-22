@@ -1,6 +1,6 @@
 import { Router } from "express";
-import productDao from "../dao/product.dao.js";
-import cartDao from "../dao/cart.dao.js";
+import productDao from "../services/dao/mongo/product.services.js";
+import cartDao from "../services/dao/mongo/cart.services.js";
 
 // clase 25
 import { fork } from "child_process";

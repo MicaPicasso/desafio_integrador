@@ -1,10 +1,9 @@
 import passport from "passport";
 import passportLocal from "passport-local"
-import userModel from "../models/userModel.js";
-import { createHash } from "../utils.js";
+import userModel from "../services/dao/mongo/models/user.js";
 import GitHubStrategy from "passport-github2";
 import jwtStrategy from 'passport-jwt';
-import {PRIVATE_KEY} from '../utils.js'
+import {PRIVATE_KEY, createHash} from '../utils.js'
 
 
 

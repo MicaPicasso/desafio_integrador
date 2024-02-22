@@ -23,9 +23,12 @@ import MongoStore from 'connect-mongo';
 import passport from 'passport';
 import initializePassport from './config/passport.config.js';
 import cookieParser from 'cookie-parser';
-import program from './process.js'
+// import program from './process.js'
 import MongoSingleton from './config/mongobd-singleton.js'
 
+
+// import studentRouter from './routes/student.router.js'
+// import coursesRouter from './routes/courses.router.js'
 
 const server= express()
 
@@ -91,16 +94,17 @@ server.use("/api/user", userRouter)
 server.use("/github", githubLoginRouter)
 server.use("/api/jwt", jwtRouter)
 
-
+// server.use("/api/students", studentRouter);
+// server.use("/api/courses", coursesRouter);
 
 
 
 
 // Conectar a la base de datos MongoDB
-mongoose.connect(
-    `mongodb+srv://micapicasso:${password}@cluster0.boiyenp.mongodb.net/${db_name}?retryWrites=true&w=majority`)
-    .then(() => {
-        console.log('Conexión exitosa a MongoDB');
+// mongoose.connect(
+//     `mongodb+srv://micapicasso:${password}@cluster0.boiyenp.mongodb.net/${db_name}?retryWrites=true&w=majority`)
+//     .then(() => {
+//         console.log('Conexión exitosa a MongoDB');
         // console.log(process);
 
         // excluir los argv por defecto ---- CLASE 25
@@ -114,18 +118,18 @@ mongoose.connect(
             // process.exit(5)
         });
 
-    })
-    .catch(error => {
-        console.error('Error al conectar a MongoDB:', error);
-    });
+    // })
+    // .catch(error => {
+    //     console.error('Error al conectar a MongoDB:', error);
+    // });
 
 
-    const mongoInstance = async () => {
-        try {
-            await MongoSingleton.getInstance()
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    // const mongoInstance = async () => {
+    //     try {
+    //         await MongoSingleton.getInstance()
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
 
-    mongoInstance();
+    // mongoInstance();
