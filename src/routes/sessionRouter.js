@@ -2,6 +2,7 @@ import { Router } from "express"
 import userModel from "../services/dao/filesystem/models/user.js"
 import {createHash, generateJWToken, isValidPassword} from '../utils.js'
 import passport from "passport";
+import UserDto from "../services/dto/users.dto.js";
 
 const router=Router();
 
@@ -113,13 +114,17 @@ router.post("/login", passport.authenticate('login',{
         // res.send({status: 'success', payload: req.session.user, message: 'Primer logueo realizado!'})
 })
 
+
 // Ruta para obtener el usuario actual usando JWT
 router.get('/current', passport.authenticate('jwt', 
 { session: false }), 
     async (req, res) => {
-    res.json({user: req.user});
+        const userD = UserDto(req.user);
+        // Enviar el DTO como respuesta en lugar del objeto de usuario original
+        res.json({ user: userD });
     
 });
+
 
 router.get('/fail-register', (req,res)=>{
     res.status(401).send({error: 'Error al registrarse'})

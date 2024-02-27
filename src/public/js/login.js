@@ -59,7 +59,7 @@ form.addEventListener('submit', e => {
                     console.log("Cookies generadas:");
                     console.log(document.cookie);
                     alert("Login realizado con exito!");
-                    window.location.replace('/api/user');
+                    // window.location.replace('/api/user');
                 });
         } else if (result.status === 401) {
             console.log(result);

@@ -13,6 +13,8 @@ import sessionRouter from "./routes/sessionRouter.js"
 import userRouter from "./routes/userRouter.js"
 import jwtRouter from "./routes/jwt.router.js"
 import githubLoginRouter from "./routes/github-loginRouter.js"
+import emailRouter from "./routes/email.router.js"
+import ticketRouter from "./routes/ticket.router.js"
 import __dirname from "./utils.js"
 import mongoose from 'mongoose';
 import { password, PORT, db_name } from "./env.js"
@@ -26,9 +28,6 @@ import cookieParser from 'cookie-parser';
 // import program from './process.js'
 import MongoSingleton from './config/mongobd-singleton.js'
 
-
-// import studentRouter from './routes/student.router.js'
-// import coursesRouter from './routes/courses.router.js'
 
 const server= express()
 
@@ -93,9 +92,8 @@ server.use("/api/session", sessionRouter)
 server.use("/api/user", userRouter)
 server.use("/github", githubLoginRouter)
 server.use("/api/jwt", jwtRouter)
-
-// server.use("/api/students", studentRouter);
-// server.use("/api/courses", coursesRouter);
+server.use("/api/email", emailRouter)
+server.use("/api/ticket", ticketRouter)
 
 
 
