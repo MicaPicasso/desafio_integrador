@@ -1,8 +1,12 @@
 import { Router } from 'express';
-// import productDao from '../services/dao/mongo/product.dao.js'
 import {productService} from '../services/factory.js'
 
 import productModel from '../services/dao/mongo/models/product.js';
+
+
+import CustomError from '../services/errors/CustomError.js'
+import { generateProductErrorInfo } from '../services/errors/messages/product_creation_error.message.js';
+import EErrors from '../services/errors/errors-enum.js';
 
 const router = Router();
 
@@ -74,7 +78,15 @@ router.get('/:pid', async(req,res)=>{
 router.post('/', async(req,res)=>{
     try {
         const {title,description,code,price,stock,category,thumbnails} = req.body;
-
+    
+        if(!title || !description || !code || !price || !stock || !category){
+            CustomError.createError({
+                name: "Product create error",
+                cause: generateProductErrorInfo({title,description,code,price,stock,category}),
+                message: 'Error tratando de crear el producto y de agregar al carrito',
+                code: EErrors.INVALID_TYPE_ERROR
+            })
+}
             const newProduct ={
                 title: title,
                 description: description,
