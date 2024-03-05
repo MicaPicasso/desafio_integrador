@@ -3,6 +3,7 @@ import { fileURLToPath } from "url"
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import passport from "passport"
+import {faker} from '@faker-js/faker'
 
 const __filename= fileURLToPath(import.meta.url)
 const __dirname= path.dirname(__filename)
@@ -84,7 +85,87 @@ export const authorization = (role) => {
     }
 };
 
+// faker
+faker.locale = 'es'; //Idioma de los datos
+export const generateProducts = () => {
+    let numOfProducts = parseInt(faker.random.numeric(1, { bannedDigits: ['0'] }));
+    // Crear una lista de roles posibles
+    let products = [];
+    for (let i = 0; i < numOfProducts; i++) {
+        products.push(generateProduct());
+    }
+    return products
+};
+
+export const generateProduct = () => {
+    return {
+        title: faker.commerce.productName(),
+        description: faker.commerce.productDescription(),
+        price: faker.commerce.price(),
+        stock: faker.string.numeric(1),
+        id: faker.database.mongodbObjectId(),
+        thumbnails: faker.image.url(),
+        category: faker.commerce.productAdjective()
+    }
+};
+
+export default __dirname;
+
+
+// export const generateProducts = () => {
+//     let numOfProducts = parseInt(faker.string.numeric(1, { bannedDigits: ['0'] }));
+//     let products = [];
+//     for (let i = 0; i < numOfProducts; i++) {
+//         products.push(generateProduct());
+//     }
+//     // return {
+//     //     name: faker.firstName(),
+//     //     last_name: faker.lastName(),
+//     //     sex: faker.sex(),
+//     //     birthDate: faker.birthdate(),
+//     //     products: products,
+//     //     id: faker.database.mongodbObjectId(),
+//     //     email: faker.internet.email(),
+//     //     rol: roles[Math.floor(Math.random() * roles.length)]
+//     // };
+//     return products
+    
+// };
+   
+// export const generateProduct = () => {
+//     return {
+//         title: faker.commerce.productName(),
+//         description: faker.commerce.productDescription(),
+//         price: faker.commerce.price(),
+//         stock: faker.string.numeric(1),
+//         id: faker.database.mongodbObjectId(),
+//         thumbnails: faker.image.url(),
+//         category: faker.commerce.productAdjective()
+//     }
+// };
+
+// // En utils.js
+// // export const generateProducts = () => {
+// //     let numOfProducts = parseInt(faker.datatype.number(1).toString(), 10);
+// //     let products = [];
+// //     for (let i = 0; i < numOfProducts; i++) {
+// //         products.push({
+// //             title: faker.commerce.productName(),
+// //             description: faker.commerce.productDescription(),
+// //             price: faker.commerce.price(),
+// //             stock: faker.datatype.number(1).toString(),
+// //             id: faker.datatype.uuid(),
+// //             thumbnails: faker.image.imageUrl(),
+// //             category: faker.commerce.productAdjective()
+// //         });
+// //     }
+// //     return products;
+// // };
 
 
 
-export default __dirname
+
+
+
+
+// export default __dirname

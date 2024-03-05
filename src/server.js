@@ -13,8 +13,8 @@ import sessionRouter from "./routes/sessionRouter.js"
 import userRouter from "./routes/userRouter.js"
 import jwtRouter from "./routes/jwt.router.js"
 import githubLoginRouter from "./routes/github-loginRouter.js"
-import emailRouter from "./routes/email.router.js"
 import ticketRouter from "./routes/ticket.router.js"
+import mockingProductsRouter from "./routes/mockingProducts.router.js"
 import __dirname from "./utils.js"
 import mongoose from 'mongoose';
 import { password, PORT, db_name } from "./env.js"
@@ -92,9 +92,8 @@ server.use("/api/session", sessionRouter)
 server.use("/api/user", userRouter)
 server.use("/github", githubLoginRouter)
 server.use("/api/jwt", jwtRouter)
-server.use("/api/email", emailRouter)
 server.use("/api/ticket", ticketRouter)
-
+server.use("/api/mockingProducts", mockingProductsRouter)
 
 
 
