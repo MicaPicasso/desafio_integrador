@@ -15,6 +15,7 @@ import jwtRouter from "./routes/jwt.router.js"
 import githubLoginRouter from "./routes/github-loginRouter.js"
 import ticketRouter from "./routes/ticket.router.js"
 import mockingProductsRouter from "./routes/mockingProducts.router.js"
+
 import __dirname from "./utils.js"
 import mongoose from 'mongoose';
 import { password, PORT, db_name } from "./env.js"
@@ -27,7 +28,7 @@ import initializePassport from './config/passport.config.js';
 import cookieParser from 'cookie-parser';
 // import program from './process.js'
 import MongoSingleton from './config/mongobd-singleton.js'
-
+import { addLogger } from './config/logger_CUSTOM.js';
 
 const server= express()
 
@@ -50,7 +51,8 @@ server.use(express.static(`${__dirname}/public`));
 server.use(express.json());
 server.use(express.urlencoded({extended:true}))
 
-
+// logger
+server.use(addLogger)
 
 
 const MONGO_URL= config.urlMongo
@@ -96,6 +98,15 @@ server.use("/api/ticket", ticketRouter)
 server.use("/api/mockingProducts", mockingProductsRouter)
 
 
+
+
+
+// endpoint logger
+server.get("/loggerTest", (req,res)=>{
+    req.logger.warning('Prueba de log level warn --> en endpoint')
+
+    res.send('Prueba de logger!')
+})
 
 // Conectar a la base de datos MongoDB
 // mongoose.connect(

@@ -86,7 +86,6 @@ export const authorization = (role) => {
 };
 
 // faker
-faker.locale = 'es'; //Idioma de los datos
 export const generateProducts = () => {
     let numOfProducts = parseInt(faker.random.numeric(1, { bannedDigits: ['0'] }));
     // Crear una lista de roles posibles
