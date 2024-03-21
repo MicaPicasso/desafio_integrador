@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import {productService} from '../services/factory.js'
-
+import userModel from '../services/dao/mongo/models/user.js';
 import productModel from '../services/dao/mongo/models/product.js';
 
 
@@ -77,8 +77,14 @@ router.get('/:pid', async(req,res)=>{
 // Ruta para agregar un nuevo producto
 router.post('/', async(req,res)=>{
     try {
-        const {title,description,code,price,stock,category,thumbnails} = req.body;
-    
+        const {title,description,code,price,stock,category,thumbnails, owner} = req.body;
+        
+        const user = await userModel.findOne({ email: email });
+        if (!user || user.role !== 'premium') {
+            return res.status(403).json({ error: 'No tienes permiso para crear productos.' });
+        }
+
+
         if(!title || !description || !code || !price || !stock || !category){
             CustomError.createError({
                 name: "Product create error",
@@ -95,7 +101,8 @@ router.post('/', async(req,res)=>{
                 status: true,
                 stock: Number(stock),
                 category: category,
-                thumbnails: thumbnails
+                thumbnails: thumbnails,
+                owner: owner,
             };
 
             const response = await productService.createProduct(newProduct);
@@ -139,7 +146,11 @@ router.delete('/:pid', async(req,res)=>{
     try {
         const { pid } = req.params;
         const deletedProduct = await productService.deleteProduct({_id: pid});
-
+        
+        const user = await userModel.findOne({ email: email });
+        if (!user || user.role !== 'admin') {
+            return res.status(403).json({ error: 'No tienes permiso para eliminar productos.' });
+        }
         if (deletedProduct) {
             res.json({ message: 'Producto eliminado correctamente' });
         } else {

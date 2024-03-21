@@ -18,3 +18,87 @@ error: GET en /api/products - at 9/3/2024- 18:48:45
 {"level":"error","message":"GET en /api/products - at 9/3/2024- 19:09:57"}
 {"level":"fatal","message":"GET en /api/products - at 9/3/2024 - 19:10:48 "}
 {"level":"error","message":"GET en /api/products - at 9/3/2024- 19:10:48"}
+{"level":"fatal","message":"GET en /api/register - at 14/3/2024 - 18:07:09 "}
+{"level":"error","message":"GET en /api/register - at 14/3/2024- 18:07:09"}
+{"level":"fatal","message":"GET en /api/session/register - at 14/3/2024 - 18:08:04 "}
+{"level":"error","message":"GET en /api/session/register - at 14/3/2024- 18:08:04"}
+{"level":"fatal","message":"GET en /api/session/register - at 14/3/2024 - 18:08:39 "}
+{"level":"error","message":"GET en /api/session/register - at 14/3/2024- 18:08:39"}
+{"level":"fatal","message":"GET en /api/session/login - at 14/3/2024 - 18:08:55 "}
+{"level":"error","message":"GET en /api/session/login - at 14/3/2024- 18:08:55"}
+{"level":"fatal","message":"GET en /api/products - at 14/3/2024 - 18:09:59 "}
+{"level":"error","message":"GET en /api/products - at 14/3/2024- 18:09:59"}
+{"level":"fatal","message":"GET en /favicon.ico - at 14/3/2024 - 18:09:59 "}
+{"level":"error","message":"GET en /favicon.ico - at 14/3/2024- 18:09:59"}
+{"level":"fatal","message":"GET en /api/session/current - at 14/3/2024 - 18:10:05 "}
+{"level":"error","message":"GET en /api/session/current - at 14/3/2024- 18:10:05"}
+{"level":"fatal","message":"GET en /api/session/login - at 14/3/2024 - 18:10:09 "}
+{"level":"error","message":"GET en /api/session/login - at 14/3/2024- 18:10:09"}
+{"level":"fatal","message":"GET en /api/session/login - at 14/3/2024 - 18:11:25 "}
+{"level":"error","message":"GET en /api/session/login - at 14/3/2024- 18:11:25"}
+{"level":"fatal","message":"GET en /api/user/login - at 14/3/2024 - 18:12:18 "}
+{"level":"error","message":"GET en /api/user/login - at 14/3/2024- 18:12:18"}
+{"level":"fatal","message":"GET en /api/user/src/public/style.css - at 14/3/2024 - 18:12:18 "}
+{"level":"error","message":"GET en /api/user/src/public/style.css - at 14/3/2024- 18:12:18"}
+{"level":"fatal","message":"GET en /user/register - at 14/3/2024 - 18:12:21 "}
+{"level":"error","message":"GET en /user/register - at 14/3/2024- 18:12:21"}
+{"level":"fatal","message":"GET en /api/user/register - at 14/3/2024 - 18:12:27 "}
+{"level":"error","message":"GET en /api/user/register - at 14/3/2024- 18:12:27"}
+{"level":"fatal","message":"GET en /api/user/src/public/style.css - at 14/3/2024 - 18:12:27 "}
+{"level":"error","message":"GET en /api/user/src/public/style.css - at 14/3/2024- 18:12:27"}
+{"level":"fatal","message":"POST en /api/jwt/register - at 14/3/2024 - 18:12:43 "}
+{"level":"error","message":"POST en /api/jwt/register - at 14/3/2024- 18:12:43"}
+{"level":"fatal","message":"POST en /api/jwt/register - at 14/3/2024 - 18:23:56 "}
+{"level":"error","message":"POST en /api/jwt/register - at 14/3/2024- 18:23:56"}
+{"level":"fatal","message":"GET en /api/user/register - at 14/3/2024 - 18:24:51 "}
+{"level":"error","message":"GET en /api/user/register - at 14/3/2024- 18:24:51"}
+{"level":"fatal","message":"GET en /api/user/src/public/style.css - at 14/3/2024 - 18:24:51 "}
+{"level":"error","message":"GET en /api/user/src/public/style.css - at 14/3/2024- 18:24:51"}
+{"level":"fatal","message":"GET en /api/user/register - at 14/3/2024 - 18:25:03 "}
+{"level":"error","message":"GET en /api/user/register - at 14/3/2024- 18:25:03"}
+{"level":"fatal","message":"GET en /api/user/src/public/style.css - at 14/3/2024 - 18:25:03 "}
+{"level":"error","message":"GET en /api/user/src/public/style.css - at 14/3/2024- 18:25:03"}
+{"level":"fatal","message":"POST en /api/jwt/register - at 14/3/2024 - 18:25:23 "}
+{"level":"error","message":"POST en /api/jwt/register - at 14/3/2024- 18:25:23"}
+{"level":"fatal","message":"POST en /api/jwt/register - at 14/3/2024 - 18:33:43 "}
+{"level":"error","message":"POST en /api/jwt/register - at 14/3/2024- 18:33:43"}
+{"level":"fatal","message":"POST en /api/jwt/register - at 14/3/2024 - 18:35:25 "}
+{"level":"error","message":"POST en /api/jwt/register - at 14/3/2024- 18:35:25"}
+{"level":"fatal","message":"POST en /api/jwt/register - at 14/3/2024 - 18:35:42 "}
+{"level":"error","message":"POST en /api/jwt/register - at 14/3/2024- 18:35:42"}
+{"level":"fatal","message":"POST en /api/jwt/register - at 14/3/2024 - 18:36:47 "}
+{"level":"error","message":"POST en /api/jwt/register - at 14/3/2024- 18:36:47"}
+{"level":"fatal","message":"POST en /api/jwt/register - at 14/3/2024 - 18:50:04 "}
+{"level":"error","message":"POST en /api/jwt/register - at 14/3/2024- 18:50:04"}
+{"level":"fatal","message":"POST en /api/jwt/register - at 14/3/2024 - 19:04:48 "}
+{"level":"error","message":"POST en /api/jwt/register - at 14/3/2024- 19:04:48"}
+{"level":"fatal","message":"POST en /api/jwt/register - at 14/3/2024 - 19:05:37 "}
+{"level":"error","message":"POST en /api/jwt/register - at 14/3/2024- 19:05:37"}
+{"level":"fatal","message":"GET en /api/user/register - at 14/3/2024 - 19:06:03 "}
+{"level":"error","message":"GET en /api/user/register - at 14/3/2024- 19:06:03"}
+{"level":"fatal","message":"GET en /api/user/src/public/style.css - at 14/3/2024 - 19:06:04 "}
+{"level":"error","message":"GET en /api/user/src/public/style.css - at 14/3/2024- 19:06:04"}
+{"level":"fatal","message":"POST en /api/jwt/register - at 14/3/2024 - 19:06:44 "}
+{"level":"error","message":"POST en /api/jwt/register - at 14/3/2024- 19:06:44"}
+{"level":"fatal","message":"POST en /api/jwt/register - at 14/3/2024 - 19:07:46 "}
+{"level":"error","message":"POST en /api/jwt/register - at 14/3/2024- 19:07:46"}
+{"level":"fatal","message":"POST en /api/jwt/register - at 14/3/2024 - 19:08:36 "}
+{"level":"error","message":"POST en /api/jwt/register - at 14/3/2024- 19:08:36"}
+{"level":"fatal","message":"POST en /api/jwt/register - at 14/3/2024 - 19:13:12 "}
+{"level":"error","message":"POST en /api/jwt/register - at 14/3/2024- 19:13:12"}
+{"level":"fatal","message":"POST en /api/jwt/register - at 14/3/2024 - 19:14:14 "}
+{"level":"error","message":"POST en /api/jwt/register - at 14/3/2024- 19:14:14"}
+{"level":"fatal","message":"POST en /api/jwt/register - at 14/3/2024 - 19:20:35 "}
+{"level":"error","message":"POST en /api/jwt/register - at 14/3/2024- 19:20:35"}
+{"level":"fatal","message":"POST en /api/jwt/register - at 14/3/2024 - 19:21:29 "}
+{"level":"error","message":"POST en /api/jwt/register - at 14/3/2024- 19:21:29"}
+{"level":"fatal","message":"POST en /api/jwt/register - at 14/3/2024 - 19:23:51 "}
+{"level":"error","message":"POST en /api/jwt/register - at 14/3/2024- 19:23:51"}
+{"level":"fatal","message":"POST en /api/jwt/register - at 14/3/2024 - 19:24:27 "}
+{"level":"error","message":"POST en /api/jwt/register - at 14/3/2024- 19:24:27"}
+{"level":"fatal","message":"GET en /api/user/login - at 21/3/2024 - 12:18:33 "}
+{"level":"error","message":"GET en /api/user/login - at 21/3/2024- 12:18:33"}
+{"level":"fatal","message":"GET en /api/user/src/public/style.css - at 21/3/2024 - 12:18:33 "}
+{"level":"error","message":"GET en /api/user/src/public/style.css - at 21/3/2024- 12:18:33"}
+{"level":"fatal","message":"GET en /favicon.ico - at 21/3/2024 - 12:18:33 "}
+{"level":"error","message":"GET en /favicon.ico - at 21/3/2024- 12:18:33"}

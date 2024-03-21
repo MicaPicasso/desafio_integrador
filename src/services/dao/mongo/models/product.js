@@ -18,7 +18,12 @@ const productSchema = new Schema({
     },
     stock: Number,
     category: String,
-    thumbnails: String
+    thumbnails: String,
+    owner: {
+        type: String,
+        default: 'admin', // Valor predeterminado si no se proporciona el propietario
+        required: true
+    }
 });
 
 productSchema.plugin(mongoosePaginate);
@@ -26,4 +31,3 @@ productSchema.plugin(mongoosePaginate);
 const productModel = model('Product', productSchema);
 
 export default productModel;
-

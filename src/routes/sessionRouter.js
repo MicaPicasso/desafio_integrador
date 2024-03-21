@@ -4,6 +4,7 @@ import {createHash, generateJWToken, isValidPassword} from '../utils.js'
 import passport from "passport";
 import UserDto from "../services/dto/users.dto.js";
 
+
 const router=Router();
 
 // rutas de session
@@ -89,7 +90,8 @@ router.post("/register", passport.authenticate('register', {
     failureRedirect: '/api/session/fail-register'
 }), async (req,res)=>{
         console.log('registrando usuario');
-        res.status(201).send({status: "exitoso", message: 'Usuario creado con exito'})
+        
+
 })
 
 // login
@@ -99,7 +101,7 @@ router.post("/login", passport.authenticate('login',{
        
     console.log('usuario encontrado');
     const user= req.user
-    console.log(user);
+    // console.log(user);
 
         // req.session.user = {
         //     name: `${user.first_name} ${user.last_name}`,

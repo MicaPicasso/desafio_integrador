@@ -43,6 +43,28 @@ async(req,res)=>{
 })
 
 
+// Ruta para cambiar el rol de un usuario a premium o user
+router.put('/premium/:uid', async (req, res) => {
+    try {
+        const { uid } = req.params;
+        const user = await userModel.findById({_id: uid});
+
+        // Verificar si el usuario existe
+        if (!user) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+
+        // Cambiar el rol del usuario
+        user.role = user.role === 'user' ? 'premium' : 'user';
+        await user.save();
+
+        res.json({ message: 'Rol de usuario actualizado correctamente', user });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Error interno del servidor', error });
+    }
+});
+
 
 
 export default router;

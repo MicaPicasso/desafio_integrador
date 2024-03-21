@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { cartService } from '../services/factory.js';
-
+import productModel from '../services/dao/mongo/models/product.js';
+import userModel from '../services/dao/mongo/models/user.js';
 
 const router = Router();
 
@@ -34,10 +35,23 @@ router.get('/:cid', async(req,res)=>{
     }
 });
 
+
+
 // agregar un producto al carrito
 router.post('/:cid/product/:pid', async(req,res)=>{
     try {
         const { cid, pid } = req.params;
+
+         // Verificar si el usuario es premium
+         const user = await userModel.findOne({ email: email });
+         if (!user || user.role === 'premium') {
+             // Si el usuario es premium, verificar si el producto pertenece al usuario
+             const product = await productModel.findById(pid);
+             if (!product || product.owner === email) {
+                 return res.status(403).json({ error: 'No puedes agregar tu propio producto al carrito.' });
+             }
+         }
+
         const cart = await cartService.getCartById({_id: cid});
 
         // Verificar si el producto ya está en el carrito

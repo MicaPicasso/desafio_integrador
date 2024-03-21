@@ -1,8 +1,11 @@
 import { Router } from "express";
 import userModel from "../services/dao/mongo/models/user.js";
+import MailingService from "../services/email/mailing.js";
+import UserService from "../services/dao/mongo/user.services.js";
 import { isValidPassword } from "../utils.js";
 import { generateJWToken } from "../utils.js";
 import passport from "passport";
+import { userService } from "../services/factory.js";
 
 const router = Router()
 
@@ -87,9 +90,50 @@ router.post("/login", async (req, res) => {
 
 // Register
 router.post('/register', passport.authenticate('register', { session: false }), async (req, res) => {
-    console.log("Registrando usuario:");
+    const {email, first_name} = req.body
+
+
+    const user = await userModel.findOne({ email: email });
+    console.log(user);
+    const miCorreo={
+        from: 'CoderTests',
+        to: user.email,
+        subject:'Te has registrado con exito',
+        html: `<div><h1>Felicidades! ${user.first_name}</h1><p>Gracias por registrarte con nosotros!!</p></div>`
+    }
+
+    const mailingService= new MailingService();
+    const correo= await mailingService.sendSimpleMail(miCorreo)
+
     res.status(201).send({ status: "success", message: "Usuario creado con extito." });
 })
+
+// Solicitar restablecimiento de contraseña
+router.post('/forgot-password', async (req, res) => {
+    const { email } = req.body;
+
+    // Verificar si el usuario existe
+    const user = await userModel.findOne({ email: email });
+    if (!user) {
+        return res.status(404).send({ status: "error", message: "El usuario no existe." });
+    }
+
+    // Enviar correo electrónico con enlace para restablecer contraseña
+    const resetLink = `http://localhost:8080/api/reset-password`;
+    const miCorreo = {
+        from: 'CoderTests',
+        to: user.email,
+        subject: 'Restablecer contraseña',
+        html: `<p>Haga clic en el siguiente enlace para restablecer su contraseña: <a href="${resetLink}">Restablecer contraseña</a></p>`
+    };
+
+    const mailingService = new MailingService();
+    await mailingService.sendSimpleMail(miCorreo);
+
+    res.status(200).send({ status: "success", message: "Correo de restablecimiento de contraseña enviado." });
+});
+
+
 
 
 export default router;
