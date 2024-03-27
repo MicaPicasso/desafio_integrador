@@ -1,0 +1,157 @@
+paths: 
+  /api/cart:
+    post:
+      summary: Crea un nuevo carrito
+      tags:
+        - Carts
+      responses:
+        '200':
+          description: Carrito creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cart'
+        '500':
+          description: Error inesperado del lado del servidor
+
+  /api/cart/{cid}:
+    get:
+      summary: Obtiene un carrito por su ID
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: ID del carrito que se desea solicitar
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Carrito encontrado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cart'
+        '404':
+          description: Carrito no encontrado
+        '500':
+          description: Error inesperado del lado del servidor
+
+    delete:
+      summary: Elimina todos los productos de un carrito por su ID
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: ID del carrito del que se desean eliminar los productos
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Productos eliminados correctamente del carrito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cart'
+        '404':
+          description: Carrito no encontrado
+        '500':
+          description: Error inesperado del lado del servidor
+
+  /api/cart/{cid}/product/{pid}:
+    post:
+      summary: Agrega un producto a un carrito por su ID
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: ID del carrito al que se desea agregar el producto
+          schema:
+            type: string
+        - name: pid
+          in: path
+          required: true
+          description: ID del producto que se desea agregar al carrito
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Producto agregado correctamente al carrito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cart'
+        '404':
+          description: Carrito no encontrado
+        '500':
+          description: Error inesperado del lado del servidor
+
+    delete:
+      summary: Elimina un producto de un carrito por su ID
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: ID del carrito del que se desea eliminar el producto
+          schema:
+            type: string
+        - name: pid
+          in: path
+          required: true
+          description: ID del producto que se desea eliminar del carrito
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Producto eliminado correctamente del carrito
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: El producto fue eliminado correctamente del carrito
+        '404':
+          description: Carrito o producto no encontrado
+        '500':
+          description: Error inesperado del lado del servidor
+
+components:
+  schemas:
+    cart:
+      type: object
+      properties: 
+        _id:
+          type: string
+          description: ID autogenerado de MongoDB
+        title:
+          type: string
+          description: Título del carrito
+        products:
+          type: array
+          description: Lista de productos en el carrito
+          items:
+            type: object
+            properties:
+              product:
+                type: string
+                description: ID del producto en el carrito
+              quantity:
+                type: integer
+                description: Cantidad del producto en el carrito
+      example: 
+        _id: "6123456789abcdef01234567"
+        title: Carrito de prueba 1
+        products:
+          - product: "6123456789abcdef01234568"
+            quantity: 2
+          - product: "6123456789abcdef01234569"
+            quantity: 1

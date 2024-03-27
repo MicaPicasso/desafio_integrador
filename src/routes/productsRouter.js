@@ -28,7 +28,7 @@ router.get('/', async(req,res)=>{
 
          // Utilizar el método paginate para obtener los productos paginados
         const result = await productModel.paginate(queryObj, options);
-
+        const products= await productService.getAll()
         // Devolver el resultado paginado
         res.json({
                 status: 'success',
@@ -41,7 +41,9 @@ router.get('/', async(req,res)=>{
                 hasNextPage: result.hasNextPage,
                 prevLink: result.prevLink,
                 nextLink: result.nextLink,
+                product: products
             });
+           
 
     } catch (error) {
         console.log(error);

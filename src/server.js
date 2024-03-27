@@ -29,6 +29,9 @@ import cookieParser from 'cookie-parser';
 // import program from './process.js'
 import MongoSingleton from './config/mongobd-singleton.js'
 import { addLogger } from './config/logger_CUSTOM.js';
+import swaggerJSDoc from 'swagger-jsdoc'
+import swaggerUIExpress from 'swagger-ui-express'
+
 
 const server= express()
 
@@ -41,6 +44,23 @@ server.engine('hbs', handlebars.engine({
 
 server.set('view engine', 'hbs');
 server.set("views", `${__dirname}/views`)
+
+
+const swaggerOptions={
+    definition:{
+        openapi: '3.0.1',
+        info: {
+            title: 'Docummentacion api adopme',
+            description: 'Documentacion para swagger'
+        }
+    },
+    apis: [`./src/docs/**/*.yaml`]
+}
+
+const specs= swaggerJSDoc(swaggerOptions)
+
+server.use('/apidocs', swaggerUIExpress.serve, swaggerUIExpress.setup(specs))
+
 
 
 // Middleware para archivos estáticos

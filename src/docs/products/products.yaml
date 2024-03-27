@@ -1,0 +1,235 @@
+paths: 
+  /api/products:
+  # obtener todos los productos
+    get:
+      summary: Obtiene todos los productos de la App
+      tags:
+        - Products
+      responses:
+        '200':
+          description: respuesta exitosa! se retorna un array con los productos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/product'
+        '400':
+          description: Se envio un dato no valido
+        '500':
+          description: Error inesperado del lado del servidor
+  # agregar un producto 
+    post:
+      summary: Agregar un nuevo producto a la App
+      tags:
+        - Products
+      parameters:
+        - in: body
+          name: product
+          description: Cargar datos del producto
+          required: true
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: Título del producto
+              description:
+                type: string
+                description: Descripción del producto
+              code:
+                type: string
+                description: Código del producto
+              price:
+                type: number
+                description: Precio del producto
+                format: float
+              stock:
+                type: integer
+                description: Stock del producto
+              category:
+                type: string
+                description: Categoría del producto
+              thumbnails:
+                type: array
+                items:
+                  type: string
+                description: Lista de URLs de las imágenes del producto
+              owner:
+                type: string
+                description: Creador del producto
+
+      responses:
+        '200':
+          description: respuesta exitosa! se retorna el producto agregado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                message:
+                  type: string
+                  description: Mensaje indicando que el producto fue creado correctamente
+                product:
+                  type: object
+                  description: Detalles del producto creado
+        '400':
+          description: Error en la solicitud (solicitud invalida)
+        '500':
+          description: Error inesperado del lado del servidor
+
+  /api/products/{pid}:
+  # obtener producto s/ id
+    get:
+      summary: Obtiene un producto por Id
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: id del producto que se desea solicitar
+          schema:
+            $type: String
+      responses:
+        '200':
+          description: respuesta exitosa! se retorna el producto solicitado segun su id
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/product'
+        '400':
+          description: Se envio un dato no valido
+        '500':
+          description: Error inesperado del lado del servidor
+  # actualizar un producto s/ id
+    put:
+      summary: Actualizar un producto por Id
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          description: id del producto que se desea actualizar
+          schema:
+            $type: String
+        - in: body
+          name: product
+          description: Datos actualizados del producto
+          required: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Nombre del producto
+              description:
+                type: string
+                description: Descripción del producto
+              price:
+                type: number
+                description: Precio del producto
+                format: float
+        
+      responses:
+        '200':
+          description: respuesta exitosa! se retorna el producto solicitado segun su id
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: ID del producto
+                  name:
+                    type: string
+                    description: Nombre del producto
+                  description:
+                    type: string
+                    description: Descripción del producto
+                  price:
+                    type: number
+                    description: Precio del producto
+                    format: float
+        '400':
+          description: Producto no encontrado
+        '500':
+          description: Error inesperado del lado del servidor 
+  # eliminar un producto s/id 
+    delete:
+      summary: Elimina un producto por su Id
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: id del producto que se desea eliminar
+          schema:
+            $type: String
+      responses:
+        '200':
+          description: Producto eliminado correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Producto eliminado correctamente
+        '400':
+          description: Producto no encontrado
+        '500':
+          description: Error inesperado del lado del servidor 
+
+          
+
+
+components:
+  schemas:
+    product:
+      type: object
+      properties: 
+        owner:
+          type: String
+          description: Tipo de usuario que creó el producto
+        _id:
+          type: ObjectId
+          description: Id autogenerado de mongo
+        title:
+          type: String
+          description: Nombre del producto
+        description:
+          type: String
+          description: Descripcion del producto
+        code:
+          type: String
+          description: Codigo del producto
+        price:
+          type: Number
+          description: Precio del producto
+        status:
+          type: Boolean
+          description: Estado del producto, por defecto true
+        stock:
+          type: Number
+          description: Stock del producto
+        category:
+          type: String
+          description: Categoria del producto
+      example: 
+        owner: admin
+        _id: ObjectId("659fe2716561cadfe75746a6")
+        title: Titulo de prueba 1
+        description: Descripcion de prueba 1
+        code: Codigo de prueba 1
+        price: 0
+        status: true
+        stock: 10
+        category: Categoria de prueba 1
+        
